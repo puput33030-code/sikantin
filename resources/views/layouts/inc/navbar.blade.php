@@ -25,7 +25,7 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                    
                     <li>
-                      <a class="dropdown-item" href="{{ route('ubah-profil') }}">
+                      <a class="dropdown-item" href="">
                         <i class="ti ti-users me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
                       </a>
                     </li>

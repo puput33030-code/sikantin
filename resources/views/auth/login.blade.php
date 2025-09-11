@@ -107,16 +107,22 @@
               <!-- /Logo -->
               <h4 class="mb-1" align="center">Welcome to SiKantin!</h4><br>
 
-              <form id="formAuthentication" class="mb-4" action="index.html" method="GET">
+              <form id="formAuthentication" class="mb-4" action="{{ route('login') }}" method="POST">
+                @csrf
                 <div class="mb-6">
-                  <label for="email" class="form-label">Email or Username</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
                     id="email"
-                    name="email-username"
-                    placeholder="Enter your email or username"
+                    name="email"
+                    placeholder="Enter your email"
                     autofocus />
+                    @error('email')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="mb-6 form-password-toggle">
                   <label class="form-label" for="password">Password</label>
@@ -130,6 +136,11 @@
                       aria-describedby="password" />
                     <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                   </div>
+                  @error('password')
+                        <span class="invalid-feedback d-block" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                  @enderror
                 </div>
                 <div class="mb-6">
                   <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
