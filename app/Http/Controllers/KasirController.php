@@ -21,8 +21,7 @@ class KasirController extends Controller
      */
     public function create()
     {
-        $users=User::create();
-        return view('pages.kasir.create', compact('users'));
+        return view('pages.kasir.create');
     }
 
     /**
@@ -30,7 +29,18 @@ class KasirController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:8',
+        ], [
+            'name.required' => 'Nama harus diisi',
+            'email.required' => 'Email harus diisi',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 8 karakter',
+        ]);
+        User::create($request->all());
+        return redirect()->route('kasir.index');
     }
 
     /**
@@ -38,7 +48,8 @@ class KasirController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $users=User::find($id);
+        return view('pages.kasir.show', compact('users'));
     }
 
     /**
@@ -46,7 +57,8 @@ class KasirController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users=User::find($id);
+        return view('pages.kasir.edit', compact('users'));
     }
 
     /**
@@ -54,7 +66,19 @@ class KasirController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:8',
+        ], [
+            'name.required' => 'Nama harus diisi',
+            'email.required' => 'Email harus diisi',
+            'password.required' => 'Password harus diisi',
+            'password.min' => 'Password minimal 8 karakter',
+        ]);
+        $users=User::find($id);
+        $users->update($request->all());
+        return redirect()->route('kasir.index');
     }
 
     /**
@@ -62,6 +86,7 @@ class KasirController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $users=User::find($id)->delete();
+        return redirect()->route('kasir.index');
     }
 }

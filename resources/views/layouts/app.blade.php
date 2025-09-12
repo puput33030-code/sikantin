@@ -51,6 +51,8 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/js/config.js') }}"></script>
+    @stack('styles')
+
   </head>
 
   <body>
@@ -110,5 +112,7 @@
 
     <!-- Main JS -->
     <script src="{{ asset('/js/main.js') }}"></script>
+
+    @stack('scripts')
   </body>
 </html>
