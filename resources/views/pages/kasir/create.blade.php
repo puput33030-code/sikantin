@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <h3 class="page-title">Tambah Kasir</h3>
             <div class="card card-body">
-                <form action="{{ route('kasir.store') }}" method="POST">
+                <form action="{{ route('kasir.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-6">
                         <label for="name">Nama Kasir</label>
@@ -37,6 +37,13 @@
                             <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-6">
+                        <label for="images" class="form-label">Gambar</label>
+                        <input type="file" name="images" id="images" class="form-control">
+                        @error('images')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="flex">

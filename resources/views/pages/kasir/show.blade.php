@@ -10,6 +10,11 @@
                 <div class="card-body">
                     <table class="table table-bordered">
                         <tr>
+                            <td colspan="1">
+                                <img src="{{ asset('storage/images/' . $users->images) }}" width="300">
+                            </td>
+                        </tr>
+                        <tr>
                             <td width="25%">ID</td>
                             <td width="10px">:</td>
                             <td>{{ $users->id }}</td>
@@ -21,10 +26,15 @@
                         </tr>
                         <tr>
                             <td width="25%">Email</td>
-                            <td width="10px">:</25td>
+                            <td width="10px">:</td>
                             <td>{{ $users->email }}</td>
                         </tr>
                         <tr>
+                            <td width='25%'>Images</td>
+                            <td width='10px'>:</td>
+                            <td>{{ $users->images }}</td>
+                        </tr>
+                                        <tr>
                             <td width="25%">Terdaftar pada</td>
                             <td width="10px">:</td>
                             <td>{{ $users->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
@@ -36,7 +46,10 @@
                         </tr>
                     </table>
                     <div class="flex mt-5">
-                        <a href="{{ route('kasir.index') }}" class="btn btn-secondary">Kembali</a>
+                        <a href="{{ route('kasir.index') }}" class="btn btn-secondary">
+                            <span class="ti ti-arrow-left"></span>Kembali</a>
+                        <a href="{{ route('kasir.edit', $users->id) }}" class="btn btn-primary">
+                            <span class="ti ti-pencil"></span>Edit</a>
                     </div>
                 </div>
             </div>

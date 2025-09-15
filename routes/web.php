@@ -21,4 +21,7 @@ Route::group([
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
     
     Route::resource('/kasir', App\Http\Controllers\KasirController::class);
+
+    Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
+    Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 });

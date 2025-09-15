@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class KasirController extends Controller
@@ -33,14 +35,29 @@ class KasirController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required|min:8',
+            'images' => 'mimes:jpg,jpeg,png|max:2048',
         ], [
             'name.required' => 'Nama harus diisi',
             'email.required' => 'Email harus diisi',
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal 8 karakter',
+            'images.mimes' => 'Format gambar harus jpg, jpeg, atau png',
+            'images.max' => 'Ukuran gambar maksimal 2MB',
         ]);
-        User::create($request->all());
-        return redirect()->route('kasir.index');
+
+        $images=$request->file('images');
+        $directory='images/';
+        $filename=Str::random(10).'.'.$images->getClientOriginalExtension();
+        Storage::putFileAs($directory, $images, $filename);
+
+        $users=User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>bcrypt($request->password), 
+            'images'=>$filename,
+        ]);
+        return redirect()->route('kasir.index', $users->id)
+        ->with('success', 'Data Kasir Berhasil Ditambahkan');
     }
 
     /**
@@ -70,15 +87,34 @@ class KasirController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required|min:8',
+            'images' => 'mimes:jpg,jpeg,png|max:2048',
         ], [
             'name.required' => 'Nama harus diisi',
             'email.required' => 'Email harus diisi',
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal 8 karakter',
+            'images.mimes' => 'Format gambar harus jpg, jpeg, atau png',
+            'images.max' => 'Ukuran gambar maksimal 2MB',
         ]);
+
         $users=User::find($id);
-        $users->update($request->all());
-        return redirect()->route('kasir.index');
+        $filename=$users->images;
+
+        if ($request->hasFile('images')) {
+        $images=$request->file('images');
+        $directory='images/';
+        $filename=Str::random(10).'.'.$images->getClientOriginalExtension();
+        Storage::putFileAs($directory, $images, $filename);
+        }
+
+        $users->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>bcrypt($request->password), 
+            'images'=>$filename,
+        ]);
+        return redirect()->route('kasir.index', $users->id)
+        ->with('success', 'Data Kasir Berhasil Diubah');
     }
 
     /**

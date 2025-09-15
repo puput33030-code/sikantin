@@ -8,7 +8,8 @@
             <h4 class="page-title">Data Kasir</h4>
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('kasir.create') }}" class="btn btn-primary">Tambah Kasir</a>
+                    <a href="{{ route('kasir.create') }}" class="btn btn-primary">
+                        <span class="ti ti-plus me-1"></span>Tambah Kasir</a>
                 </div>
                 <div class="card-body">
                     <table id="dataTable" class="table table-bordered table-striped">
@@ -18,7 +19,6 @@
                                 <th>No</th>
                                 <th>Nama Kasir</th>
                                 <th>Email</th>
-                                <th>Image</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -28,7 +28,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $kasir->name }}</td>
                                 <td>{{ $kasir->email }}</td>
-                                <td><img src="{{ asset('storage/' . $kasir->images) }}" alt="" width="100"></td>
                                 <td>
                                     <a href="{{ route('kasir.show', $kasir->id) }}" class="btn btn-secondary">
                                         <span class="ti ti-eye"></span>Detail</a>
@@ -85,4 +84,16 @@
       });
     }
     </script>
+
+    @if (Session::has('success'))
+        <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ Session::get('success') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        </script>
+    @endif
 @endpush

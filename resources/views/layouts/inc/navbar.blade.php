@@ -17,15 +17,19 @@
                   <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="d-flex align-items-center gap-1">
                     <div class="avatar avatar-online">
-                      <img src="{{ asset('/img/avatars/1.png') }}" alt class="rounded-circle" />
+                      <img src="{{ asset('storage/images/' . Auth::user()->images) }}"
+                      alt="profile"
+                      class="rounded-circle"
+                      width="40" height="40" />
                     </div>
                     <span>{{ Auth::user()->name }}</span>
                 </div>
+
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                    
                     <li>
-                      <a class="dropdown-item" href="">
+                      <a class="dropdown-item" href="{{ route('ubah-profil') }}">
                         <i class="ti ti-users me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
                       </a>
                     </li>
