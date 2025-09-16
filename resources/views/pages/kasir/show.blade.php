@@ -48,8 +48,6 @@
                     <div class="flex mt-5">
                         <a href="{{ route('kasir.index') }}" class="btn btn-secondary">
                             <span class="ti ti-arrow-left"></span>Kembali</a>
-                        <a href="{{ route('kasir.edit', $users->id) }}" class="btn btn-primary">
-                            <span class="ti ti-pencil"></span>Edit</a>
                     </div>
                 </div>
             </div>

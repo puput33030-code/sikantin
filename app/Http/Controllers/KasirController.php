@@ -35,7 +35,7 @@ class KasirController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required|min:8',
-            'images' => 'mimes:jpg,jpeg,png|max:2048',
+            'images' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ], [
             'name.required' => 'Nama harus diisi',
             'email.required' => 'Email harus diisi',
@@ -45,10 +45,14 @@ class KasirController extends Controller
             'images.max' => 'Ukuran gambar maksimal 2MB',
         ]);
 
+        $filename = null;
+
+        if ($request->hasFile('images')) {
         $images=$request->file('images');
         $directory='images/';
         $filename=Str::random(10).'.'.$images->getClientOriginalExtension();
         Storage::putFileAs($directory, $images, $filename);
+        }
 
         $users=User::create([
             'name'=>$request->name,
@@ -72,22 +76,13 @@ class KasirController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $users=User::find($id);
-        return view('pages.kasir.edit', compact('users'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required|min:8',
-            'images' => 'mimes:jpg,jpeg,png|max:2048',
+            'password' => 'nullable|min:8|confirmed',
+            'images' => 'nullable|mimes:jpg,jpeg,png|max:2048',
         ], [
             'name.required' => 'Nama harus diisi',
             'email.required' => 'Email harus diisi',
@@ -123,6 +118,7 @@ class KasirController extends Controller
     public function destroy(string $id)
     {
         $users=User::find($id)->delete();
-        return redirect()->route('kasir.index');
+        return redirect()->route('kasir.index')
+        ->with('success', 'Data Kasir Berhasil Dihapus');
     }
 }

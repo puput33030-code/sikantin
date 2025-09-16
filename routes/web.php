@@ -20,8 +20,9 @@ Route::group([
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
     
-    Route::resource('/kasir', App\Http\Controllers\KasirController::class);
+    Route::resource('/kasir', App\Http\Controllers\KasirController::class)->except(['edit', 'update']);
 
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
+    Route::get('/ubah-profil/edit', [App\Http\Controllers\ProfilController::class, 'edit'])->name('ubah-profil.edit');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 });

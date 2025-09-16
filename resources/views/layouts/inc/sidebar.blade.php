@@ -40,7 +40,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-            <li class="menu-item active open">
+            <li class="menu-item {{ request()->routeIs('home') ? 'active open' : '' }}">
               <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
@@ -51,7 +51,7 @@
             <li class="menu-header small">
               <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ request()->routeIs('kasir.*') ? 'active open' : '' }}">
               <a href="{{ route('kasir.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Data Kasir">Data Kasir</div>

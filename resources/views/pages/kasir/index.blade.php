@@ -12,27 +12,25 @@
                         <span class="ti ti-plus me-1"></span>Tambah Kasir</a>
                 </div>
                 <div class="card-body">
-                    <table id="dataTable" class="table table-bordered table-striped">
+                    <table id="dataTable" class="table table-bordered table-striped dataTable">
 
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama Kasir</th>
-                                <th>Email</th>
-                                <th>Aksi</th>
+                                <th class="border">No</th>
+                                <th class="border">Nama Kasir</th>
+                                <th class="border">Email</th>
+                                <th class="border">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $kasir)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $kasir->name }}</td>
-                                <td>{{ $kasir->email }}</td>
-                                <td>
-                                    <a href="{{ route('kasir.show', $kasir->id) }}" class="btn btn-secondary">
+                                <td class="border">{{ $loop->iteration }}</td>
+                                <td class="border">{{ $kasir->name }}</td>
+                                <td class="border">{{ $kasir->email }}</td>
+                                <td class="border">
+                                    <a href="{{ route('kasir.show', $kasir->id) }}" class="btn btn-primary">
                                         <span class="ti ti-eye"></span>Detail</a>
-                                    <a href="{{ route('kasir.edit', $kasir->id) }}" class="btn btn-primary">
-                                        <span class="ti ti-pencil"></span>Edit</a>
                                     <a href="javascript:;" class="btn btn-danger"
                                     onclick="actionDelete('{{ route('kasir.destroy', $kasir->id) }}')">
                                         <span class="ti ti-trash"></span>Hapus</a>

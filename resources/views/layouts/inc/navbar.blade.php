@@ -30,7 +30,7 @@
                    
                     <li>
                       <a class="dropdown-item" href="{{ route('ubah-profil') }}">
-                        <i class="ti ti-users me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
+                        <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
                       </a>
                     </li>
                     <li>
