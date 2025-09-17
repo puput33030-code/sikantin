@@ -22,7 +22,7 @@
                       class="rounded-circle"
                       width="40" height="40" />
                     </div>
-                    <span>{{ Auth::user()->name }}</span>
+                    <span class="fw-semibold d-none d-md-block ms-2">{{ Auth::user()->name }}</span>
                 </div>
 
                   </a>

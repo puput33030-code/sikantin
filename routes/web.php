@@ -25,4 +25,6 @@ Route::group([
     Route::get('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'index'])->name('ubah-profil');
     Route::get('/ubah-profil/edit', [App\Http\Controllers\ProfilController::class, 'edit'])->name('ubah-profil.edit');
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
+
+    Route::resource('/menu', App\Http\Controllers\MenuController::class);
 });
