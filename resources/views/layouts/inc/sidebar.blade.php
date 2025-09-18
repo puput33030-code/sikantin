@@ -47,15 +47,16 @@
               </a>
             </li>
 
-            <!-- Apps & Pages -->
-            <li class="menu-header small">
-              <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
-            </li>
             <li class="menu-item {{ request()->routeIs('kasir.*') ? 'active open' : '' }}">
               <a href="{{ route('kasir.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-users"></i>
                 <div data-i18n="Data Kasir">Data Kasir</div>
               </a>
+
+            <!-- Apps & Pages -->
+            <li class="menu-header small">
+              <span class="menu-header-text" data-i18n="Apps & Pages">Apps &amp; Pages</span>
+            </li>
             </li>
             <li class="menu-item">
               <a href="app-chat.html" class="menu-link">
@@ -69,8 +70,8 @@
                 <div data-i18n="Data Menu">Data Menu</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="app-kanban.html" class="menu-link">
+            <li class="menu-item {{ request()->routeIs('kategori.*') ? 'active open' : '' }}">
+              <a href="{{ route('kategori.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-category"></i>
                 <div data-i18n="Kategori Menu">Kategori Menu</div>
               </a>

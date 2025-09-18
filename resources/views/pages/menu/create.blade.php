@@ -53,9 +53,9 @@
                                 @enderror
                             </div>
                             <div class="mb-6">
-                                <label for="images" class="form-label">Gambar</label>
-                                <input type="file" name="images" id="images" class="form-control">
-                                @error('images')
+                                <label for="image" class="form-label">Gambar</label>
+                                <input type="file" name="image" id="image" class="form-control">
+                                @error('image')
                                     <div class="invalid-feedback d-block">
                                         {{ $message }}
                                     </div>

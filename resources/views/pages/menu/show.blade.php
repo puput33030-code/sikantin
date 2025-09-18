@@ -12,7 +12,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <td colspan="1">
-                                <img src="{{ asset('storage/images/' . $menu->images) }}" width="300">
+                                <img src="{{ asset('storage/images/' . $menus->image) }}" width="300">
                             </td>
                         </tr>
                         <tr>
@@ -28,7 +28,7 @@
                         <tr>
                             <td width="25%">Kategori</td>
                             <td width="10px">:</td>
-                            <td>{{ $menus->category->name }}</td>
+                            <td>{{ $menus->categories->category }}</td>
                         </tr>
                         <tr>
                             <td width="25%">Harga</td>
@@ -43,7 +43,7 @@
                         <tr>
                             <td width='25%'>Images</td>
                             <td width='10px'>:</td>
-                            <td>{{ $menus->images }}</td>
+                            <td>{{ $menus->image }}</td>
                         </tr>
                         <tr>
                             <td width="25%">Terdaftar pada</td>
@@ -57,10 +57,11 @@
                         </tr>
                     </table>
                     <div class="d-flex mt-5">
-                        <a href="{{ route('menu.index') }}" class="btn btn-primary"><span class="ti ti-arrow-left me-1"></span>Kembali</a>
+                        <a href="{{ route('menu.index') }}" class="btn btn-secondary"><span class="ti ti-arrow-left me-1"></span>Kembali</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection

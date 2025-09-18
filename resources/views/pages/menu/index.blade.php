@@ -27,13 +27,13 @@
                             @foreach ($menus as $menu)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $menu->category->category }}</td>
+                                    <td>{{ $menu->categories->category }}</td>
                                     <td>{{ $menu->name }}</td>
                                     <td>{{ $menu->price }}</td>
                                     <td>
-                                        <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-primary">
+                                        <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-secondary">
                                             <span class="ti ti-eye"></span>Detail</a>
-                                        <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-warning">
+                                        <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-primary">
                                             <span class="ti ti-pencil"></span>Edit</a>
                                         <a href="javascript:;" class="btn btn-danger"
                                         onclick="actionDelete('{{ route('menu.destroy', $menu->id) }}')">

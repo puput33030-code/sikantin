@@ -27,4 +27,6 @@ Route::group([
     Route::post('/ubah-profil', [App\Http\Controllers\ProfilController::class, 'update'])->name('ubah-profil.update');
 
     Route::resource('/menu', App\Http\Controllers\MenuController::class);
+
+    Route::resource('/kategori', App\Http\Controllers\CategoryController::class)->except(['show']);
 });
