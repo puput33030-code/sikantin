@@ -2,9 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('pages.order.index');
+// });
+Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
+
+// Tambahkan menu ke keranjang (session)
+Route::post('/order/add/{menu}', [App\Http\Controllers\OrderController::class, 'addToCart'])->name('order.add');
+
+// Tampilkan halaman checkout (isi keranjang + form data diri)
+Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('order.checkout');
+
+// Proses checkout (simpan ke tabel orders & order_items)
+Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'processCheckout'])->name('order.process');
+
 
 Auth::routes([
     'register' => false,
