@@ -14,30 +14,35 @@ class OrderController extends Controller
 
     // tampilkan semua menu
     public function index() {
-        $menus = Menu::all();
+        $menus = Menu::with('categories')->get();
         return view('pages.order.index', compact('menus'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
 
-    public function addToCart(Request $request, Menu $menu)
+    // tampilkan keranjang
+    public function cart(Request $request)
     {
         $cart = session()->get('cart', []);
+        return view('pages.order.cart', compact('cart'));
+    }
 
-        if(isset($cart[$menu->id])) {
-            $cart[$menu->id]['qty']++;
+    // tambah ke keranjang
+    public function addToCart(Request $request, $id)
+    {
+        $menus = Menu::findOrFail($id);
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]['qty']++;
         } else {
-            $cart[$menu->id] = [
-                "name" => $menu->name,
-                "total_price" => $menu->total_price,
+            $cart[$menus->id] = [
+                "name" => $menus->name,
+                "price" => $menus->price,
                 "qty" => 1,
-                "image" => $menu->image
+                "image" => $menus->image
             ];
         }
 
@@ -45,9 +50,24 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Menu ditambahkan ke keranjang');
     }
 
+    // hapus dari keranjang
+    public function removeFromCart($id)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+        return redirect()->back()->with('success', 'Menu dihapus dari keranjang');
+    }
+
+    // checkout
     public function checkout()
     {
-        $cart = session('cart', []);
+        $cart = session()->get('cart', []);
+        if (empty($cart)) {
+            return redirect()->route('customer.menu')->with('error', 'Keranjang kosong!');
+        }
         return view('pages.order.checkout', compact('cart'));
     }
 
@@ -66,7 +86,7 @@ class OrderController extends Controller
             'order_type.enum' => 'Tipe pesanan tidak valid',
         ]);
 
-        $cart = session('cart', []);
+        $cart = session()->get('cart', []);
         if(empty($cart)) {
             return redirect()->route('order.index')->with('error', 'Keranjang kosong!');
         }
@@ -78,19 +98,28 @@ class OrderController extends Controller
             'order_type' => $request->order_type,
             'delivery_address' => $request->delivery_address,
             'notes' => $request->notes,
-            'total' => collect($cart)->sum(fn($item) => $item['price'] * $item['qty']),
+            'total_price' => 0,
+            'status' => 'diproses',
         ]);
 
+        $total = 0;
+
         // simpan ke order_items
-        foreach($cart as $menuId => $item) {
+        foreach($cart as $id => $item) {
+            $menu = Menu::findOrFail($id);
+            $subtotal = $menu->price * $item['qty'];
+            $total += $subtotal;
+
             OrderItem::create([
                 'order_id' => $order->id,
-                'menu_id' => $menuId,
+                'menu_id' => $menu->id,
                 'qty' => $item['qty'],
-                'unit_price' => $item['unit_price'],
-                'subtotal' => $item['unit_price'] * $item['qty'],
+                'unit_price' => $menu->price,
+                'subtotal' => $subtotal,
             ]);
         }
+        
+        $order->update(['total_price' => $total]);
 
         session()->forget('cart');
         return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat!');

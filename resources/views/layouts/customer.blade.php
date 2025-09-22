@@ -66,12 +66,47 @@
   </head>
 
   <body>
+    <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-        <div class="layout-page">
-          @yield('content')
-        </div>
-      </div>
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+                @yield('content')
+            </div>
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+
+      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+      <div class="drag-target"></div>
     </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="{{ asset('/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/node-waves/node-waves.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/hammer/hammer.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/i18n/i18n.js') }}"></script>
+    <script src="{{ asset('/vendor/libs/typeahead-js/typeahead.js') }}"></script>
+    <script src="{{ asset('/vendor/js/menu.js') }}"></script>
+
+    <!-- endbuild -->
+
+    <!-- Main JS -->
+    <script src="{{ asset('/js/main.js') }}"></script>
+
+    @stack('scripts')
   </body>
 </html>

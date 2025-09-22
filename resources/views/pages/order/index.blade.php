@@ -24,8 +24,33 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="d-flex justify-content-end mt-4">
+                    <a href="{{ route('order.cart') }}" class="btn btn-danger"><span class="ti ti-shopping-cart me-1"></span>Keranjang Belanja</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+
+    @if (Session::has('success'))
+        <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ Session::get('success') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        </script>
+    @endif
+@endpush

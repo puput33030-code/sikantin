@@ -10,6 +10,12 @@ Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('o
 // Tambahkan menu ke keranjang (session)
 Route::post('/order/add/{menu}', [App\Http\Controllers\OrderController::class, 'addToCart'])->name('order.add');
 
+// Tampilkan keranjang
+Route::get('/cart', [App\Http\Controllers\OrderController::class, 'cart'])->name('order.cart');
+
+// Hapus keranjang 
+Route::get('/cart/delete/{id}', [App\Http\Controllers\OrderController::class, 'removeFromCart'])->name('cart.delete');
+
 // Tampilkan halaman checkout (isi keranjang + form data diri)
 Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('order.checkout');
 
