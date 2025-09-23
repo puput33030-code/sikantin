@@ -35,7 +35,8 @@
                             <td>{{ $item['qty'] }}</td>
                             <td>Rp{{ number_format($subtotal, 0, ',', '.') }}</td>
                             <td>
-                                <a href="{{ route('cart.delete', $id) }}" class="btn btn-danger">
+                                <a href="javascript:;" class="btn btn-danger"
+                                    onclick="actionDelete('{{ route('cart.delete', $id) }}')">
                                     <span class="ti ti-trash"></span></a>
                             </td>
                         </tr>
@@ -55,7 +56,7 @@
                 <div class="page-title">
                     <h4>Form Pemesanan</h4>
                 </div>
-                <form action="{{ route('order.process') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('order.saveCustomer') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-3">
                         <label for="name">Nama</label>
@@ -117,6 +118,11 @@
         </div>
     </div>
 </div>
+
+<form id="form-delete" action="" method="POST" class="d-none">
+    @csrf
+    @method('DELETE')
+</form>
 @endsection
 
 @push('styles')
@@ -150,4 +156,16 @@
       });
     }
     </script>
+
+    @if (Session::has('success'))
+        <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ Session::get('success') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        </script>
+    @endif
 @endpush

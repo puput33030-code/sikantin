@@ -14,10 +14,15 @@ Route::post('/order/add/{menu}', [App\Http\Controllers\OrderController::class, '
 Route::get('/cart', [App\Http\Controllers\OrderController::class, 'cart'])->name('order.cart');
 
 // Hapus keranjang 
-Route::get('/cart/delete/{id}', [App\Http\Controllers\OrderController::class, 'removeFromCart'])->name('cart.delete');
+Route::delete('/cart/delete/{id}', [App\Http\Controllers\OrderController::class, 'removeFromCart'])->name('cart.delete');
 
 // Tampilkan halaman checkout (isi keranjang + form data diri)
-Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('order.checkout');
+Route::get('/checkout/{id}', [App\Http\Controllers\OrderController::class, 'checkout'])->name('order.checkout');
+
+Route::post('/cart/save-customer', [App\Http\Controllers\OrderController::class, 'saveCustomerInfo'])->name('order.saveCustomer');
+Route::get('/confirmation', [App\Http\Controllers\OrderController::class, 'confirmation'])->name('order.confirmation');
+Route::post('/place-order', [App\Http\Controllers\OrderController::class, 'placeOrder'])->name('order.placeOrder');
+
 
 // Proses checkout (simpan ke tabel orders & order_items)
 Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'processCheckout'])->name('order.process');
