@@ -51,4 +51,8 @@ Route::group([
     Route::resource('/menu', App\Http\Controllers\MenuController::class);
 
     Route::resource('/kategori', App\Http\Controllers\CategoryController::class)->except(['show']);
+
+    Route::resource('/order', App\Http\Controllers\AdminOrderController::class)->only(['index', 'show']);
+    Route::post('/orders/{id}/status', [App\Http\Controllers\AdminOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
 });
