@@ -19,7 +19,7 @@ class OrderStatusMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($order)
     {
         $this->order=$order;
     }
@@ -30,7 +30,7 @@ class OrderStatusMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Status Pesanan Anda #' . $this->order->$id,
+            subject: 'Status Pesanan Anda #' . $this->order->id,
         );
     }
 

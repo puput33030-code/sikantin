@@ -31,18 +31,18 @@
                                 <td>{{ $order->email }}</td>
                                 <td>{{ $order->order_type }}</td>
                                 <td>Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
-                                <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
+                                <td><form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
                                     @csrf
                                     <select name="status" class="form-control">
                                         <option value="diproses" {{ $order->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
                                         <option value="siap" {{ $order->status == 'siap' ? 'selected' : '' }}>Siap</option>
                                         <option value="selesai" {{ $order->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
                                     </select>
-                                    <button type="submit" class="btn btn-primary mt-2">Update Status</button>
+                                    <button type="submit" class="btn btn-info mt-2">Update</button>
                                 </form>
-
+                                </td>
                                 <td>
-                                    <a href="{{ route('order.show', $order->id) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{ route('orderr.show', $order->id) }}" class="btn btn-primary">Detail</a>
                                 </td>
                             </tr>
                             @endforeach

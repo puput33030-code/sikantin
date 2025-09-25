@@ -33,7 +33,7 @@
                                     <td>{{ $item->qty }}</td>
                                     <td>Rp {{ number_format($item->menus->price, 0, ',', '.') }}</td>
                                     <td>Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
-                                    <td>{{ $item->notes ?? '-' }}</td>
+                                    <td>{{ $order->notes ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -45,7 +45,7 @@
                         </tfoot>
                     </table>
                     <div class="d-flex mt-5">
-                        <a href="{{ route('order.index') }}" class="btn btn-secondary"><span class="ti ti-arrow-left me-1"></span>Kembali</a>
+                        <a href="{{ route('orderr.index') }}" class="btn btn-secondary"><span class="ti ti-arrow-left me-1"></span>Kembali</a>
                     </div>
                 </div>
             </div>

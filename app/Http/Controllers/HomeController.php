@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $orders = Order::with('order_items.menus')
+            ->latest()
+            ->take(5)
+            ->get();
+    
+        $query = Order::groupBy('date')
+            ->selectRaw('count(*) as total, DATE_FORMAT(created_at, "%d/%m") as date')
+            ->orderBy('date', 'asc');
+        $data = $query->pluck('total')->toArray();
+        $labels = $query->pluck('date')->toArray();
+
+        return view('home', compact('orders', 'data', 'labels'));
     }
 }

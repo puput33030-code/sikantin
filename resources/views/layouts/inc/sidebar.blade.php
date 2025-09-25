@@ -34,7 +34,7 @@
             </li>
             </li>
             <li class="menu-item {{ request()->routeIs('order.*') ? 'active open' : '' }}">
-              <a href="{{ route('order.index') }}" class="menu-link">
+              <a href="{{ route('orderr.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-shopping-bag"></i>
                 <div data-i18n="Data Pesanan">Data Pesanan</div>
               </a>

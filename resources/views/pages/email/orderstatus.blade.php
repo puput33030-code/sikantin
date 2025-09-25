@@ -10,15 +10,15 @@
     <p>Status pesanan Anda dengan nomor <strong>#{{ $order->id }}</strong> telah siap.</p>
 
     <p>
-        Siapkan Uang Senilai: <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong> untuk Membayar Pesanan Anda.
+        @if($order->order_type == 'diambil')
+            Anda dapat mengambilnya sekarang😉
+        @elseif($order->order_type == 'diantar')
+            Mohon tetap di tempat, pesanan sedang dalam perjalanan menuju Anda🚀
+        @endif
     </p>
 
     <p>
-        @if($order->order_type == 'diambil')
-            Pesanan sudah siap, Anda dapat mengambilnya sekarang😉
-        @elseif($order->order_type == 'diantar')
-            Pesanan Anda sudah siap, mohon tetap di tempat, pesanan sedang dalam perjalanan menuju Anda🚀
-        @endif
+        Siapkan Uang Senilai: <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong> untuk Membayar Pesanan Anda.
     </p>
 
     <p>Terima kasih telah memesan di Aplikasi SiKantin!</p>
