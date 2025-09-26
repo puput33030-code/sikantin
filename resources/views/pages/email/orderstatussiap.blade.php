@@ -18,9 +18,7 @@
     </p>
 
     <p>
-        Siapkan Uang Senilai: <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong> untuk Membayar Pesanan Anda.
+        Siapkan uang senilai: <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong> untuk membayar pesanan anda.
     </p>
-
-    <p>Terima kasih telah memesan di Aplikasi SiKantin!</p>
 </body>
 </html>

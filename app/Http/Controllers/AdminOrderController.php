@@ -25,7 +25,12 @@ class AdminOrderController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        $order->update(['status'=>'siap']);
+
+        if ($order->status === 'diproses') {
+            $order->update(['status'=>'siap']);
+        } elseif ($order->status === 'siap') {
+            $order->update(['status'=>'selesai']);
+        }
 
         // Kirim email ke customer
         Mail::to($order->email)->send(new OrderStatusMail($order));

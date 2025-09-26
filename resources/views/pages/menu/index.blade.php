@@ -26,11 +26,11 @@
                         <tbody>
                             @foreach ($menus as $menu)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $menu->categories->category }}</td>
-                                    <td>{{ $menu->name }}</td>
-                                    <td>{{ $menu->price }}</td>
-                                    <td>
+                                    <td class="border">{{ $loop->iteration }}</td>
+                                    <td class="border">{{ $menu->categories->category }}</td>
+                                    <td class="border">{{ $menu->name }}</td>
+                                    <td class="border">Rp {{ number_format($menu->price, 0, ',', '.') }}</td>
+                                    <td class="border">
                                         <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-secondary">
                                             <span class="ti ti-eye"></span>Detail</a>
                                         <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-primary">

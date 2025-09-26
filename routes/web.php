@@ -13,6 +13,8 @@ Route::post('/order/add/{menu}', [App\Http\Controllers\OrderController::class, '
 // Tampilkan keranjang
 Route::get('/cart', [App\Http\Controllers\OrderController::class, 'cart'])->name('order.cart');
 
+Route::patch('/cart/{id}', [App\Http\Controllers\OrderController::class, 'update'])->name('cart.update');
+
 // Hapus keranjang 
 Route::delete('/cart/delete/{id}', [App\Http\Controllers\OrderController::class, 'removeFromCart'])->name('cart.delete');
 
@@ -54,5 +56,8 @@ Route::group([
 
     Route::resource('/orderr', App\Http\Controllers\AdminOrderController::class)->only(['index', 'show']);
     Route::post('/orders/{id}/status', [App\Http\Controllers\AdminOrderController::class, 'updateStatus'])->name('orders.updateStatus');
+
+    Route::get('/laporan/harian', [App\Http\Controllers\OrderController::class, 'laporanHarian'])->name('laporan.harian');
+
 
 });

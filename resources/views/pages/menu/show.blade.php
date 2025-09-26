@@ -33,7 +33,7 @@
                         <tr>
                             <td width="25%">Harga</td>
                             <td width="10px">:</td>
-                            <td>{{ $menus->price }}</td>
+                            <td>Rp {{ number_format($menus->price, 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td width="25%">Stock</td>

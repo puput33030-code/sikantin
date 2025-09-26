@@ -14,6 +14,7 @@
                     <h5>Pesanan #{{ $order->id }}</h5>
                     <p><strong>Nama Pemesan:</strong> {{ $order->name }}</p>
                     <p><strong>Email:</strong> {{ $order->email }}</p>
+                    <p><strong>Dipesan pada:</strong> {{ $order->created_at->format('d F Y') }} pukul {{ $order->created_at->format('H:i') }}</p>
                     <table class="table table-striped">
                         <thead>
                             <tr>

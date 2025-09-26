@@ -6,12 +6,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <h4 class="page-title">Data Pesanan</h4>
             <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Data Pesanan</h4>
-                </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped dataTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -46,6 +44,11 @@
                                 </td>
                             </tr>
                             @endforeach
+                            @if ($orders->isEmpty())
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">Belum Ada Pesanan</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -54,3 +57,24 @@
     </div>
 </div>
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    @if (Session::has('success'))
+        <script type="text/javascript">
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ Session::get('success') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        </script>
+    @endif
+@endpush

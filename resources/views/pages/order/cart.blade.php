@@ -32,6 +32,30 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item['name'] }}</td>
                             <td>Rp {{ number_format($item['price'], 0, ',', '.') }}</td>
+                            <td class="text-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    {{-- Tombol Kurang --}}
+                                    <form action="{{ route('cart.update', $id) }}" method="POST" class="me-2">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="qty" value="{{ $item['qty'] - 1 }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                            @if($item['qty'] <= 1) disabled @endif>-</button>
+                                    </form>
+
+                                    {{-- Jumlah --}}
+                                    <span class="mx-2">{{ $item['qty'] }}</span>
+
+                                    {{-- Tombol Tambah --}}
+                                    <form action="{{ route('cart.update', $id) }}" method="POST" class="ms-2">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="qty" value="{{ $item['qty'] + 1 }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+                                    </form>
+                                </div>
+                            </td>
+
                             <td>{{ $item['qty'] }}</td>
                             <td>Rp{{ number_format($subtotal, 0, ',', '.') }}</td>
                             <td>
@@ -40,9 +64,6 @@
                                     <span class="ti ti-trash"></span></a>
                             </td>
                         </tr>
-                        {{-- @php
-                            $totalPrice += $cart->total_price;
-                        @endphp --}}
                         @endforeach
                     </tbody>
                     <tfoot>
@@ -165,6 +186,16 @@
             text: '{{ Session::get('success') }}',
             showConfirmButton: false,
             timer: 3000
+        });
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script type="text/javascript">
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: '{{ Session::get('error') }}',
+            showConfirmButton: true
         });
         </script>
     @endif

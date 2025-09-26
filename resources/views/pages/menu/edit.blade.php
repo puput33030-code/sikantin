@@ -66,7 +66,7 @@
                             </div>
                             <div class="d-flex mt-5">
                             <a href="{{ route('menu.index') }}" class="btn btn-secondary"><span class="ti ti-x me-1"></span>Batal</a>
-                            <button type="submit" class="btn btn-primary"><span class="ti ti-send me-1"></span>Simpan</button>
+                            <button type="submit" class="btn btn-primary ms-2"><span class="ti ti-send me-1"></span>Simpan</button>
                             </div>
                         </form>
                     </div>

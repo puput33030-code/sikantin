@@ -62,6 +62,26 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Menu dihapus dari keranjang');
     }
 
+    // update qty di keranjang
+    public function update(Request $request, $id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $qty = (int) $request->qty;
+
+            if ($qty > 0) {
+                $cart[$id]['qty'] = $qty; // update qty
+            } else {
+                unset($cart[$id]); // hapus kalau qty 0
+            }
+
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->back();
+    }
+
     // checkout
     public function checkout($id)
     {
@@ -73,60 +93,6 @@ class OrderController extends Controller
 
         return view('pages.order.checkout', compact('orders', 'order_items'));
     }
-
-    // public function processCheckout(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'email' => 'required',
-    //         'order_type' => 'required',
-    //         'delivery_address' => 'nullable',
-    //         'notes' => 'nullable',
-    //     ], [
-    //         'name.required' => 'Nama harus diisi',
-    //         'email.required' => 'Email harus diisi',
-    //         'order_type.required' => 'Tipe pesanan harus dipilih',
-    //     ]);
-
-    //     $cart = session()->get('cart', []);
-    //     if(empty($cart)) {
-    //         return redirect()->route('order.index')->with('error', 'Keranjang kosong!');
-    //     }
-
-    //     // simpan ke tabel orders
-    //     $order = Order::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'order_type' => $request->order_type,
-    //         'delivery_address' => $request->delivery_address,
-    //         'notes' => $request->notes,
-    //         'total_price' => 0,
-    //         'status' => 'diproses',
-    //     ]);
-
-    //     $total = 0;
-
-    //     // simpan ke order_items
-    //     foreach($cart as $id => $item) {
-    //         $menu = Menu::findOrFail($id);
-    //         $subtotal = $menu->price * $item['qty'];
-    //         $total += $subtotal;
-
-    //         OrderItem::create([
-    //             'order_id' => $order->id,
-    //             'menu_id' => $menu->id,
-    //             'qty' => $item['qty'],
-    //             'unit_price' => $menu->price,
-    //             'subtotal' => $subtotal,
-    //         ]);
-    //     }
-        
-    //     $order->update(['total_price' => $total]);
-
-    //     session()->forget('cart');
-    //     return redirect()->route('order.checkout', $order->id);
-    //     // return redirect()->route('order.index')->with('success', 'Pesanan berhasil dibuat!');
-    // }
 
     /**
      * Store a newly created resource in storage.
@@ -189,6 +155,10 @@ class OrderController extends Controller
         $total = 0;
         foreach ($cart as $id => $item) {
             $menu = Menu::findOrFail($id);
+            if ($menu->stock < $item['qty']) {
+                return redirect()->route('order.cart')
+                    ->with('error', "Stok untuk menu {$menu->name} tidak mencukupi. Sisa stok: {$menu->stock}");
+            }
             $subtotal = $menu->price * $item['qty'];
             $total += $subtotal;
 
@@ -199,6 +169,9 @@ class OrderController extends Controller
                 'unit_price' => $menu->price,
                 'subtotal' => $subtotal,
             ]);
+
+            $menu->stock -= $item['qty'];
+            $menu->save();
         }
 
         $order->update(['total_price' => $total]);
@@ -209,4 +182,22 @@ class OrderController extends Controller
         return redirect()->route('order.index', $order->id)
                         ->with('success', 'Pesanan berhasil dibuat!');
     }
+
+    public function laporanHarian(Request $request)
+    {
+        // Ambil tanggal dari request (kalau ada), default hari ini
+        $tanggal = $request->input('tanggal', now()->toDateString());
+
+        // Ambil pesanan sesuai tanggal
+        $orders = Order::whereDate('created_at', $tanggal)->get();
+
+        // Hitung total pesanan & total harga
+        $summary = [
+            'total_pesanan' => $orders->count(),
+            'total_price'   => $orders->sum('total_price'), // pastikan ada kolom total_harga di tabel orders
+        ];
+
+        return view('pages.laporan.harian', compact('orders', 'summary', 'tanggal'));
+    }
+
 }

@@ -15,10 +15,14 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $menu->name }}</h5>
                                     <p class="card-text">Harga: Rp{{ number_format($menu->price, 0, ',', '.') }}</p>
-                                    <form action="{{ route('order.add', $menu->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger">Tambahkan ke Keranjang</button>
-                                    </form>
+                                    @if ($menu->stock > 0)
+                                        <form action="{{ route('order.add', $menu->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Tambahkan ke Keranjang</button>
+                                        </form>
+                                    @else
+                                        <button class="btn btn-secondary" disabled>Habis</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>

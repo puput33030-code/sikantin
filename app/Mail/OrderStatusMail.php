@@ -29,8 +29,12 @@ class OrderStatusMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $subject=match($this->order->status){
+            'siap'=>'Status Pesanan Anda #' . $this->order->id,
+            'selesai'=>'Status Pesanan Anda #' . $this->order->id,
+        };
         return new Envelope(
-            subject: 'Status Pesanan Anda #' . $this->order->id,
+            subject: $subject,
         );
     }
 
@@ -39,8 +43,16 @@ class OrderStatusMail extends Mailable
      */
     public function content(): Content
     {
+        $view=match($this->order->status){
+            'siap'=>'pages.email.orderstatussiap',
+            'selesai'=>'pages.email.orderstatusselesai',
+        };
+
         return new Content(
-            view: 'pages.email.orderstatus',
+            view: $view,
+            with: [
+                'order' => $this->order
+            ],
         );
     }
 

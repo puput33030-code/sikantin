@@ -32,8 +32,7 @@
             <li class="menu-header small">
               <span class="menu-header-text" data-i18n="Pages">Pages</span>
             </li>
-            </li>
-            <li class="menu-item {{ request()->routeIs('order.*') ? 'active open' : '' }}">
+            <li class="menu-item {{ request()->routeIs('orderr.*') ? 'active open' : '' }}">
               <a href="{{ route('orderr.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-shopping-bag"></i>
                 <div data-i18n="Data Pesanan">Data Pesanan</div>
@@ -49,6 +48,15 @@
               <a href="{{ route('kategori.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-category"></i>
                 <div data-i18n="Kategori Menu">Kategori Menu</div>
+              </a>
+            </li>
+            <li class="menu-header small">
+              <span class="menu-header-text" data-i18n="Laporan">Laporan</span>
+            </li>
+            <li class="menu-item {{ request()->routeIs('laporan.harian') ? 'active open' : '' }}">
+              <a href="{{ route('laporan.harian') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-file"></i>
+                <div data-i18n="Laporan">Laporan</div>
               </a>
             </li>
           </ul>
