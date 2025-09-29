@@ -65,7 +65,13 @@
 @endpush
 
 @push('scripts')
+    <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script>
+        $(function () {
+            $('.dataTable').DataTable();
+        });
+    </script>
     @if (Session::has('success'))
         <script type="text/javascript">
         Swal.fire({

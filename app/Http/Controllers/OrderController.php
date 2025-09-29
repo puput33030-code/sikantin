@@ -140,6 +140,13 @@ class OrderController extends Controller
         if (empty($cart) || empty($customer)) {
             return redirect()->route('order.cart')->with('error', 'Data tidak lengkap.');
         }
+        foreach ($cart as $id => $item) {
+            $menu = Menu::findOrFail($id);
+            if ($menu->stock < $item['qty']) {
+                return redirect()->route('order.cart')
+                    ->with('error', "Stok untuk menu {$menu->name} tidak mencukupi. Sisa stok: {$menu->stock}");
+            }
+        }
 
         // Simpan ke tabel orders
         $order = Order::create([
@@ -155,10 +162,6 @@ class OrderController extends Controller
         $total = 0;
         foreach ($cart as $id => $item) {
             $menu = Menu::findOrFail($id);
-            if ($menu->stock < $item['qty']) {
-                return redirect()->route('order.cart')
-                    ->with('error', "Stok untuk menu {$menu->name} tidak mencukupi. Sisa stok: {$menu->stock}");
-            }
             $subtotal = $menu->price * $item['qty'];
             $total += $subtotal;
 
@@ -180,12 +183,12 @@ class OrderController extends Controller
         session()->forget(['cart', 'customer']);
 
         return redirect()->route('order.index', $order->id)
-                        ->with('success', 'Pesanan berhasil dibuat!');
+                        ->with('success', 'Pesanan berhasil dibuat! Tunggu email dari kami jika pesanan Anda telah siap.');
     }
 
     public function laporanHarian(Request $request)
     {
-        // Ambil tanggal dari request (kalau ada), default hari ini
+        // Ambil tanggal dari request (kalau ada), default hari ini.
         $tanggal = $request->input('tanggal', now()->toDateString());
 
         // Ambil pesanan sesuai tanggal
