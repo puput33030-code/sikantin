@@ -65,6 +65,11 @@
                             </td>
                         </tr>
                         @endforeach
+                        @if (empty($cart))
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Keranjang Belanja Kosong</td>
+                            </tr>
+                        @endif
                     </tbody>
                     <tfoot>
                         <tr>

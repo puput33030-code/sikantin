@@ -30,12 +30,12 @@
                         <tr>
                             <td width="25%">Alamat Tujuan</td>
                             <td width="10px">:</td>
-                            <td>{{ $customer['delivery_address'] }}</td>
+                            <td>{{ $customer['delivery_address'] ?? '-' }}</td>
                         </tr>
                         <tr>
                             <td width="25%">Catatan</td>
                             <td width="10px">:</td>
-                            <td>{{ $customer['notes' ?? '-'] }}</td>
+                            <td>{{ $customer['notes'] ?? '-' }}</td>
                         </tr>
                     </table>
                     <hr class="my-6" style="color: pink; border: 2px solid">

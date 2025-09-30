@@ -10,6 +10,7 @@
                     @foreach ($menus as $menu)
                         <div class="col-md-3 mb-4">
                             <div class="card h-100 text-center">
+                                <div class="card-header d-flex align-items-center justify-content-center" style="height: 50px;"> {{ $menu->categories->category }}</div>
                                 <img src="{{ asset('storage/images/' . $menu->image) }}"
                                 class="card-img-top" alt="{{ $menu->categories->category }}" style="height: 150px; object-fit: cover;">
                                 <div class="card-body">
