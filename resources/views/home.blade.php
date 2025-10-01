@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard')
 @section('content')
 <div class="container">
     <h4>Dashboard</h4>
@@ -34,6 +35,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{{ route('orderr.index') }}" class="btn btn-primary">Lihat Semua Pesanan</a>
+                    </div>
                 </div>
             </div>
         </div>
