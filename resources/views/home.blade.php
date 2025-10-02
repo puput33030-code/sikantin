@@ -17,7 +17,7 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>Menu</th>
-                                <th>Total Harga</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,7 +30,7 @@
                                         {{ $item->menus->name }} ({{ $item->qty }})@if (!$loop->last), @endif
                                     @endforeach
                                 </td>
-                                <td>Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
+                                <td>{{ $order->status }}</td>
                             </tr>
                             @endforeach
                         </tbody>

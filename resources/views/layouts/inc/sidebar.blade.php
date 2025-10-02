@@ -34,13 +34,13 @@
             </li>
             <li class="menu-item {{ request()->routeIs('orderr.*') ? 'active open' : '' }}">
               <a href="{{ route('orderr.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-shopping-bag"></i>
+                <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
                 <div data-i18n="Data Pesanan">Data Pesanan</div>
               </a>
             </li>
             <li class="menu-item {{ request()->routeIs('menu.*') ? 'active open' : '' }}">
               <a href="{{ route('menu.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-clipboard-list"></i>
+                <img src="{{ asset('img/icons/iconmenu4.jpg') }}" class="menu-icon tf-icons">
                 <div data-i18n="Data Menu">Data Menu</div>
               </a>
             </li>
