@@ -3,6 +3,12 @@
 @section('title', 'Dashboard')
 @section('content')
 <div class="container">
+<div class="alert alert-primary d-flex align-items-center" role="alert">
+  <i class="ti ti-check me-2"></i>
+  <div>
+    Selamat datang di halaman beranda admin
+  </div>
+</div>
     <h4>Dashboard</h4>
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -30,7 +36,9 @@
                                         {{ $item->menus->name }} ({{ $item->qty }})@if (!$loop->last), @endif
                                     @endforeach
                                 </td>
-                                <td>{{ $order->status }}</td>
+                                <td><span class="badge bg-{{ $order->status == 'diproses' ? 'warning' : ($order->status == 'siap' ? 'info' : 'success') }}">
+                                    {{ ucfirst($order->status) }}</span>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -13,10 +13,10 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Menu</th>
-                            <th>Harga</th>
-                            <th>Jumlah</th>
-                            <th>Total</th>
-                            <th>Aksi</th>
+                            <th class="text-center">Harga</th>
+                            <th class="text-center">Jumlah</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,7 +31,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item['name'] }}</td>
-                            <td>Rp {{ number_format($item['price'], 0, ',', '.') }}</td>
+                            <td class="text-center">Rp {{ number_format($item['price'], 0, ',', '.') }}</td>
                             <td class="text-center">
                                 <div class="d-flex align-items-center justify-content-center">
                                     {{-- Tombol Kurang --}}
@@ -55,10 +55,8 @@
                                     </form>
                                 </div>
                             </td>
-
-                            <td>{{ $item['qty'] }}</td>
-                            <td>Rp{{ number_format($subtotal, 0, ',', '.') }}</td>
-                            <td>
+                            <td class="text-center">Rp{{ number_format($subtotal, 0, ',', '.') }}</td>
+                            <td class="text-center">
                                 <a href="javascript:;" class="btn btn-danger"
                                     onclick="actionDelete('{{ route('cart.delete', $id) }}')">
                                     <span class="ti ti-trash"></span></a>
@@ -74,7 +72,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="4" class="text-center">Total Harga</td>
-                            <td colspan="2">Rp{{ number_format($totalPrice, 0, ',', '.') }}</td>
+                            <td class="text-center">Rp{{ number_format($totalPrice, 0, ',', '.') }}</td>
                         </tr>
                     </tfoot>
                 </table>

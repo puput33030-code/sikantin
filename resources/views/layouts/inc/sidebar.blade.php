@@ -40,7 +40,7 @@
             </li>
             <li class="menu-item {{ request()->routeIs('menu.*') ? 'active open' : '' }}">
               <a href="{{ route('menu.index') }}" class="menu-link">
-                <img src="{{ asset('img/icons/iconmenu4.jpg') }}" class="menu-icon tf-icons">
+                <img src="{{ asset('img/icons/iconmenu4.png') }}" class="menu-icon tf-icons">
                 <div data-i18n="Data Menu">Data Menu</div>
               </a>
             </li>
