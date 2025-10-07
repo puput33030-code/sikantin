@@ -82,7 +82,9 @@
                 </div>
                 <form action="{{ route('order.saveCustomer') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group mb-3">
+                    <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
                         <label for="name">Nama</label>
                         <input type="text" name="name" class="form-control"
                             value="{{ old('name') }}" placeholder="Nama">
@@ -91,8 +93,10 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                    </div>
-                    <div class="form-group mb-3">
+                        </div>
+                        </div>
+                        <div class="col md-6">
+                        <div class="form-group mb-3">
                         <label for="email">Email</label>
                         <input type="email" name="email" class="form-control"
                             value="{{ old('email') }}" placeholder="Email">
@@ -101,6 +105,8 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                        </div>
+                        </div>
                     </div>
                     <div class="form-group mb-3">
                         <label for="order_type">Jenis Order</label>
@@ -115,6 +121,8 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="row">
+                    <div class="col md-6">
                     <div class="form-group mb-3">
                         <label for="delivery_address">Alamat Tujuan</label>
                         <textarea name="delivery_address" id="delivery_address" placeholder="Isi alamat tujuan jika memilih opsi diantar" class="form-control">{{ old('delivery_address') }}</textarea>
@@ -124,6 +132,8 @@
                             </div>
                         @enderror
                     </div>
+                    </div>
+                    <div class="col md-6">
                     <div class="form-group mb-3">
                         <label for="notes">Catatan</label>
                         <textarea name="notes" id="notes" placeholder="Isi catatan jika ada" class="form-control">{{ old('notes') }}</textarea>
@@ -132,6 +142,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                    </div>
                     </div>
                     <div class="d-flex justify-content-end mt-5">
                         <a href="{{ route('order.index') }}" class="btn btn-secondary"><span class="ti ti-arrow-left me-1"></span>Kembali ke Menu</a>
