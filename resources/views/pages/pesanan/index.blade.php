@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <table class="table table-striped dataTable">
                         <thead>
-                            <tr>
+                            <tr style="background-color: #7367f0;">
                                 <th>No</th>
                                 <th>Nama Pemesan</th>
                                 <th>Email</th>

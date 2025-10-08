@@ -19,24 +19,24 @@
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Menu</th>
-                                <th>Status</th>
+                            <tr style="background-color: #7367f0;">
+                                <th class="text-center" style="color: #fff">No</th>
+                                <th class="text-center" style="color: #fff">Nama</th>
+                                <th class="text-center" style="color: #fff">Menu</th>
+                                <th class="text-center" style="color: #fff">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
+                            <tr class="bg-label-primary">
+                                <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $order->name }}</td>
                                 <td>
                                     @foreach ($order->order_items as $item)
                                         {{ $item->menus->name }} ({{ $item->qty }})@if (!$loop->last), @endif
                                     @endforeach
                                 </td>
-                                <td><span class="badge bg-{{ $order->status == 'diproses' ? 'warning' : ($order->status == 'siap' ? 'info' : 'success') }}">
+                                <td class="text-center"><span class="badge bg-{{ $order->status == 'diproses' ? 'warning' : ($order->status == 'siap' ? 'info' : 'success') }}">
                                     {{ ucfirst($order->status) }}</span>
                                 </td>
                             </tr>
@@ -44,21 +44,37 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('orderr.index') }}" class="btn btn-primary">Lihat Semua Pesanan</a>
+                        <a href="{{ route('orderr.index') }}" class="btn btn-label-info">Lihat Semua Pesanan</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-12">
+    <div class="row mt-4">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">
-                    <h5>Grafik Pesanan</h5>
+                <div class="card-header" style="background-color: var(--bs-primary);">
+                    <h5 class="card-title d-flex align-items-center text-white">Grafik Pesanan</h5>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body mt-4">
                     <canvas id="chart" class="chartjs" data-height="500"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" style="background-color: var(--bs-primary);">
+                    <h5 class="card-title d-flex align-items-center text-white">Laporan Harian</h5>
+                </div>
+
+                <div class="card-body mt-4">
+                    <p><strong>Hari Ini: {{ $tanggal }} </strong></p>
+                    <p><strong>Pesanan: {{ $summary['total_pesanan'] }} </strong></p>
+                    <p><strong>Pendapatan: Rp {{ number_format($summary['total_price'], 0, ',', '.') }} </strong></p>
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{{ route('laporan.harian') }}" class="btn btn-label-info">Lihat Semua Laporan</a>
+                    </div>
                 </div>
             </div>
         </div>

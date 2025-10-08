@@ -22,7 +22,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
         $orders = Order::with('order_items.menus')
             ->latest()
@@ -35,6 +35,24 @@ class HomeController extends Controller
         $data = $query->pluck('total')->toArray();
         $labels = $query->pluck('date')->toArray();
 
-        return view('home', compact('orders', 'data', 'labels'));
+        $tanggal = $request->input('tanggal', now()->toDateString());
+        $ordersHarian = Order::whereDate('created_at', $tanggal)->get();
+        $summary = [
+            'total_pesanan' => $ordersHarian->count(),
+            'total_price'   => $ordersHarian->sum('total_price'),
+        ];
+
+        return view('home', compact('orders', 'data', 'labels', 'ordersHarian', 'tanggal', 'summary'));
+    }
+
+    public function laporanHarian(Request $request)
+    {
+        $tanggal = $request->input('tanggal', now()->toDateString());
+        $orders = Order::whereDate('created_at', $tanggal)->get();
+        $summary = [
+            'total_pesanan' => $orders->count(),
+            'total_price'   => $orders->sum('total_price'),
+        ];
+        return view('home', compact('orders', 'summary', 'tanggal'));
     }
 }

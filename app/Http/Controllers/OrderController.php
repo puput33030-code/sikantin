@@ -197,10 +197,10 @@ class OrderController extends Controller
         // Hitung total pesanan & total harga
         $summary = [
             'total_pesanan' => $orders->count(),
-            'total_price'   => $orders->sum('total_price'), // pastikan ada kolom total_harga di tabel orders
+            'total_price'   => $orders->sum('total_price'),
         ];
 
         return view('pages.laporan.harian', compact('orders', 'summary', 'tanggal'));
-    }
+    }  
 
 }
