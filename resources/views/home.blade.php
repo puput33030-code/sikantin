@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
-                            <tr style="background-color: #7367f0;">
+                            <tr style="background-color: var(--bs-primary);">
                                 <th class="text-center" style="color: #fff">No</th>
                                 <th class="text-center" style="color: #fff">Nama</th>
                                 <th class="text-center" style="color: #fff">Menu</th>
@@ -44,7 +44,7 @@
                         </tbody>
                     </table>
                     <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('orderr.index') }}" class="btn btn-label-info">Lihat Semua Pesanan</a>
+                        <a href="{{ route('orderr.index') }}" class="btn btn-label-secondary">Lihat Semua Pesanan</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <p><strong>Pesanan: {{ $summary['total_pesanan'] }} </strong></p>
                     <p><strong>Pendapatan: Rp {{ number_format($summary['total_price'], 0, ',', '.') }} </strong></p>
                     <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('laporan.harian') }}" class="btn btn-label-info">Lihat Semua Laporan</a>
+                        <a href="{{ route('laporan.harian') }}" class="btn btn-label-secondary">Lihat Semua Laporan</a>
                     </div>
                 </div>
             </div>

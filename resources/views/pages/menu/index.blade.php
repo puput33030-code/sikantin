@@ -16,28 +16,28 @@
 
                         <thead>
                             <tr>
-                                <th class="border">No</th>
-                                <th class="border">Kategori</th>
-                                <th class="border">Nama Menu</th>
-                                <th class="border">Harga</th>
-                                <th class="border">Aksi</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Kategori</th>
+                                <th class="text-center">Nama Menu</th>
+                                <th class="text-center">Harga</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($menus as $menu)
                                 <tr>
-                                    <td class="border">{{ $loop->iteration }}</td>
-                                    <td class="border">{{ $menu->categories->category }}</td>
-                                    <td class="border">{{ $menu->name }}</td>
-                                    <td class="border">Rp {{ number_format($menu->price, 0, ',', '.') }}</td>
-                                    <td class="border">
+                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                    <td>{{ $menu->categories->category }}</td>
+                                    <td>{{ $menu->name }}</td>
+                                    <td class="text-center">Rp {{ number_format($menu->price, 0, ',', '.') }}</td>
+                                    <td class="text-center">
                                         <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-secondary">
-                                            <span class="ti ti-eye"></span>Detail</a>
-                                        <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-primary">
-                                            <span class="ti ti-pencil"></span>Edit</a>
-                                        <a href="javascript:;" class="btn btn-danger"
+                                            <span class="ti ti-eye"></span></a>
+                                        <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-primary ms-2">
+                                            <span class="ti ti-pencil"></span></a>
+                                        <a href="javascript:;" class="btn btn-danger ms-2"
                                         onclick="actionDelete('{{ route('menu.destroy', $menu->id) }}')">
-                                            <span class="ti ti-trash"></span>Hapus</a>
+                                            <span class="ti ti-trash"></span></a>
                                     </td>
                                 </tr>
                             @endforeach

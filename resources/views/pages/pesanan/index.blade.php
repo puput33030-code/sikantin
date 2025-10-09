@@ -11,36 +11,36 @@
                 <div class="card-body">
                     <table class="table table-striped dataTable">
                         <thead>
-                            <tr style="background-color: #7367f0;">
-                                <th>No</th>
-                                <th>Nama Pemesan</th>
-                                <th>Email</th>
-                                <th>Jenis Order</th>
-                                <th>Total Harga</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama Pemesan</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Jenis Order</th>
+                                <th class="text-center">Total Harga</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $order->name }}</td>
                                 <td>{{ $order->email }}</td>
-                                <td>{{ $order->order_type }}</td>
-                                <td>Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
-                                <td><form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
+                                <td class="text-center">{{ $order->order_type }}</td>
+                                <td class="text-center">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
+                                <td class="text-center"><form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
                                     @csrf
                                     <select name="status" class="form-control">
                                         <option value="diproses" {{ $order->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
                                         <option value="siap" {{ $order->status == 'siap' ? 'selected' : '' }}>Siap</option>
                                         <option value="selesai" {{ $order->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
                                     </select>
-                                    <button type="submit" class="btn btn-info mt-2">Update</button>
+                                    <button type="submit" class="btn btn-info mt-2 align-self-center">Update</button>
                                 </form>
                                 </td>
                                 <td>
-                                    <a href="{{ route('orderr.show', $order->id) }}" class="btn btn-primary">Detail</a>
+                                    <a href="{{ route('orderr.show', $order->id) }}" class="btn btn-primary align-self-center">Detail</a>
                                 </td>
                             </tr>
                             @endforeach

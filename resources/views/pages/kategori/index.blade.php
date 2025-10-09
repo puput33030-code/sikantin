@@ -13,22 +13,22 @@
                             <table class="table table-striped dataTable">
                                 <thead>
                                     <tr>
-                                        <th class="border">No</th>
-                                        <th class="border">Nama Kategori</th>
-                                        <th class="border">Aksi</th>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Nama Kategori</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
                                     <tr>
-                                        <td class="border">{{ $loop->iteration }}</td>
-                                        <td class="border">{{ $category->category }}</td>
-                                        <td>
-                                            <a href="{{ route('kategori.edit', $category->id) }}" class="btn btn-primary">
-                                                <span class="ti ti-pencil me-1"></span>Edit</a>
-                                            <a href="javascript:;" class="btn btn-danger"
+                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td>{{ $category->category }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('kategori.edit', $category->id) }}" class="btn btn-secondary">
+                                                <span class="ti ti-pencil me-1"></span></a>
+                                            <a href="javascript:;" class="btn btn-danger ms-4"
                                             onclick="actionDelete('{{ route('kategori.destroy', $category->id) }}')">
-                                                <span class="ti ti-trash"></span>Hapus</a>
+                                                <span class="ti ti-trash"></span></a>
                                         </td>
                                     </tr>
                                     @endforeach
