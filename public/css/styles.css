@@ -1,0 +1,72 @@
+:root {
+  --bg: #d7e6f4;
+  --menu-bg: rgba(255, 255, 255, 0.7);
+  --border: rgba(0, 0, 0, 0.06);
+  --accent: #2563eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --radius: 16px;
+  --transition: 0.3s ease;
+}
+
+body {
+  background: var(--bg);
+}
+
+.action-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 60px;
+  height: 50px;
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.action-btn:hover,
+.action-btn:focus-visible {
+  width: 150px;
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.action-btn-icon {
+  font-family: "Material Symbols Rounded";
+  font-size: 26px;
+  margin-left: 16px;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.action-btn:hover .action-btn-icon {
+  transform: scale(1.1);
+}
+
+.action-btn-title {
+  margin-left: 12px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity var(--transition), transform var(--transition);
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.action-btn:hover .action-btn-title,
+.action-btn:focus-visible .action-btn-title {
+  opacity: 1;
+  transform: translateX(0);
+}

@@ -43,8 +43,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('orderr.index') }}" class="btn btn-label-secondary">Lihat Semua Pesanan</a>
+                    <div class="d-flex justify-content-end mt-8">
+                        <a href="{{ route('orderr.index') }}" class="btn btn-label-info">Lihat Semua Pesanan</a>
                     </div>
                 </div>
             </div>
@@ -68,12 +68,12 @@
                     <h5 class="card-title d-flex align-items-center text-white">Laporan Harian</h5>
                 </div>
 
-                <div class="card-body mt-4">
-                    <p><strong>Hari Ini: {{ $tanggal }} </strong></p>
-                    <p><strong>Pesanan: {{ $summary['total_pesanan'] }} </strong></p>
-                    <p><strong>Pendapatan: Rp {{ number_format($summary['total_price'], 0, ',', '.') }} </strong></p>
-                    <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('laporan.harian') }}" class="btn btn-label-secondary">Lihat Semua Laporan</a>
+                <div class="card-body mt-8">
+                    <h5><strong>Hari Ini: {{ $tanggal }} </strong></h5>
+                    <h5><strong>Pesanan: {{ $summary['total_pesanan'] }} </strong></h5>
+                    <h5><strong>Pendapatan: Rp {{ number_format($summary['total_price'], 0, ',', '.') }} </strong></h5>
+                    <div class="d-flex justify-content-end mt-8">
+                        <a href="{{ route('laporan.harian') }}" class="btn btn-label-info">Lihat Semua Laporan</a>
                     </div>
                 </div>
             </div>

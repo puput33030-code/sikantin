@@ -16,19 +16,19 @@
 
                         <thead>
                             <tr>
-                                <th class="border">No</th>
-                                <th class="border">Nama Kasir</th>
-                                <th class="border">Email</th>
-                                <th class="border">Aksi</th>
+                                <th class="text-center">No</th>
+                                <th class="text-center">Nama Kasir</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $kasir)
                             <tr>
-                                <td class="border">{{ $loop->iteration }}</td>
-                                <td class="border">{{ $kasir->name }}</td>
-                                <td class="border">{{ $kasir->email }}</td>
-                                <td class="border">
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ $kasir->name }}</td>
+                                <td>{{ $kasir->email }}</td>
+                                <td class="text-center">
                                     <a href="{{ route('kasir.show', $kasir->id) }}" class="btn btn-primary">
                                         <span class="ti ti-eye"></span>Detail</a>
                                     <a href="javascript:;" class="btn btn-danger"

@@ -51,6 +51,9 @@
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">  
+
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/js/config.js') }}"></script>
     @stack('styles')
