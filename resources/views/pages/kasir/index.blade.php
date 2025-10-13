@@ -29,11 +29,15 @@
                                 <td>{{ $kasir->name }}</td>
                                 <td>{{ $kasir->email }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('kasir.show', $kasir->id) }}" class="btn btn-primary">
-                                        <span class="ti ti-eye"></span>Detail</a>
-                                    <a href="javascript:;" class="btn btn-danger"
+                                    <div class="action-btns">
+                                    <a href="{{ route('kasir.show', $kasir->id) }}" class="action-btn" style="background-color: var(--bs-secondary)">
+                                        <span class="action-btn-icon material-symbols-rounded">visibility</span>
+                                        <span class="action-btn-title">Detail</span></a>
+                                    <a href="javascript:;" class="action-btn" style="background-color: var(--bs-danger)"
                                     onclick="actionDelete('{{ route('kasir.destroy', $kasir->id) }}')">
-                                        <span class="ti ti-trash"></span>Hapus</a>
+                                        <span class="action-btn-icon material-symbols-rounded">delete</span>
+                                        <span class="action-btn-title">Hapus</span></a>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

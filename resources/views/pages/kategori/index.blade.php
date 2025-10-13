@@ -24,11 +24,15 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $category->category }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('kategori.edit', $category->id) }}" class="btn btn-secondary">
-                                                <span class="ti ti-pencil me-1"></span></a>
-                                            <a href="javascript:;" class="btn btn-danger ms-4"
+                                            <div class="action-btns">
+                                                <a href="{{ route('kategori.edit', $category->id) }}" class="action-btn" style="background-color: var(--bs-primary)">
+                                                <span class="action-btn-icon material-symbols-rounded">edit</span>
+                                                <span class="action-btn-title">Edit</span></a>
+                                            <a href="javascript:;" class="action-btn" style="background-color: var(--bs-danger)"
                                             onclick="actionDelete('{{ route('kategori.destroy', $category->id) }}')">
-                                                <span class="ti ti-trash"></span></a>
+                                                <span class="action-btn-icon material-symbols-rounded">delete</span>
+                                                <span class="action-btn-title">Hapus</span></a>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach

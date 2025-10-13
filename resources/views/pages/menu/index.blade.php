@@ -32,17 +32,16 @@
                                     <td class="text-center">Rp {{ number_format($menu->price, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <div class="action-btns">
-                                        <a href="{{ route('menu.show', $menu->id) }}" class="action-btn"  style="background-color: var(--bs-secondary)">
+                                        <a href="{{ route('menu.show', $menu->id) }}" class="action-btn" style="background-color: var(--bs-secondary)">
                                             <span class="action-btn-icon material-symbols-rounded">visibility</span>
                                             <span class="action-btn-title">Detail</span></a>
-                                        <a href="{{ route('menu.edit', $menu->id) }}" class="action-btn"  style="background-color: var(--bs-primary)">
+                                        <a href="{{ route('menu.edit', $menu->id) }}" class="action-btn" style="background-color: var(--bs-primary)">
                                             <span class="action-btn-icon material-symbols-rounded">edit</span>
                                             <span class="action-btn-title">Edit</span></a>
                                         <a href="javascript:;" class="action-btn" style="background-color: var(--bs-danger)"
                                         onclick="actionDelete('{{ route('menu.destroy', $menu->id) }}')">
                                             <span class="action-btn-icon material-symbols-rounded">delete</span>
-                                            <span class="action-btn-title">Hapus</span>
-                                        </a>
+                                            <span class="action-btn-title">Hapus</span></a>
                                         </div>
                                     </td>
                                 </tr>
