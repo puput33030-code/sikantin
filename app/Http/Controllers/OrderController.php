@@ -6,17 +6,29 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Category;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+        $categoryId = $request->input('category'); // kategori dipilih
 
-    // tampilkan semua menu
-    public function index() {
-        $menus = Menu::with('categories')->get();
-        return view('pages.order.index', compact('menus'));
+        $menus = Menu::with('categories')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->when($categoryId, function ($query, $categoryId) {
+                $query->where('category_id', $categoryId);
+            })
+            ->get();
+
+        $categories = Category::all(); // ambil semua kategori
+
+        $cartCount = session('cart') ? count(session('cart')) : 0;
+
+        return view('pages.order.index', compact('menus', 'categories', 'cartCount'));
     }
 
     /**
@@ -202,5 +214,26 @@ class OrderController extends Controller
 
         return view('pages.laporan.harian', compact('orders', 'summary', 'tanggal'));
     }  
+    public function menu(Request $request)
+    {
+        $query = Menu::with('categories');
+
+        // 🔍 Filter berdasarkan nama menu
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // 🏷️ Filter berdasarkan kategori
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        $menus = $query->get();
+
+        // Ambil daftar kategori untuk dropdown
+        $categories = Category::all();
+
+        return view('pages.order.index', compact('menus', 'categories'));
+    }
 
 }

@@ -1,4 +1,40 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+            <style>
+    /* Menu aktif atau terbuka */
+    #layout-menu .menu-item.active > .menu-link,
+    #layout-menu .menu-item.open > .menu-link {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      box-shadow: none !important;
+      border-radius: 0.375rem !important;
+    }
+
+    /* Warna ikon dan teks di menu aktif */
+    #layout-menu .menu-item.active .menu-icon,
+    #layout-menu .menu-item.active .menu-link div,
+    #layout-menu .menu-item.open .menu-icon,
+    #layout-menu .menu-item.open .menu-link div {
+      color: #000000 !important;
+    }
+
+    /* Hilangkan garis biru bawaan Vuexy */
+    #layout-menu .menu-item.active > .menu-link::before,
+    #layout-menu .menu-item.open > .menu-link::before {
+      background-color: transparent !important;
+    }
+
+    /* Hover tetap lembut */
+    #layout-menu .menu-item:hover > .menu-link {
+      background-color: #f8f8f8 !important;
+      color: #000000 !important;
+    }
+
+    /* Saat menu sedang dibuka oleh Vuexy (transisi open) */
+    #layout-menu .menu-item.active.open:not(.menu-item-closing) > .menu-link {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+  </style>
           <div class="app-brand demo">
             <a href="" class="app-brand-link">
               <div class="mt-3 mb-3" style="text-align: center;">
@@ -40,7 +76,7 @@
             </li>
             <li class="menu-item {{ request()->routeIs('menu.*') ? 'active open' : '' }}">
               <a href="{{ route('menu.index') }}" class="menu-link">
-                <img src="{{ asset('img/icons/iconmenu4.png') }}" class="menu-icon tf-icons">
+                <i class="menu-icon tf-icons ti ti-burger"></i>
                 <div data-i18n="Data Menu">Data Menu</div>
               </a>
             </li>
