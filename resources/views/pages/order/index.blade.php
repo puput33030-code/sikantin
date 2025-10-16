@@ -54,7 +54,7 @@
                                             class="card-img-top" alt="{{ $menu->categories->category }}"
                                             style="height: 150px; object-fit: cover;">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $menu->name }}</h5>
+                                            <h5 class="card-title">{{ ucfirst($menu->name) }}</h5>
                                             <p class="card-text" style="color: rgb(197, 128, 0)">Harga: Rp{{ number_format($menu->price, 0, ',', '.') }}</p>
                                             @if ($menu->stock > 0)
                                                 <form action="{{ route('order.add', $menu->id) }}" method="POST">

@@ -3,7 +3,7 @@
 @section('title', 'Kategori Menu')
 @section('content')
 <div class="container">
-    <div class="rowr">
+    <div class="row">
         <div class="col-md-12">
             <h4 class="card-header">Kategori Menu</h4>
             <div class="card">
@@ -22,7 +22,7 @@
                                     @foreach ($categories as $category)
                                     <tr>
                                         <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $category->category }}</td>
+                                        <td class="text-center">{{ $category->category }}</td>
                                         <td class="text-center">
                                             <div class="action-btns">
                                                 <a href="{{ route('kategori.edit', $category->id) }}" class="action-btn" style="background-color: var(--bs-primary)">

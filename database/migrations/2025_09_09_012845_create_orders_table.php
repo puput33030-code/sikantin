@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('delivery_address', 64)->nullable();
             $table->longText('notes')->nullable();
             $table->decimal('total_price', 10, 2)->unsigned()->default(0);
-            $table->enum('status', ['diproses', 'siap', 'selesai'])->default('diproses');
+            $table->enum('status', ['pending', 'diproses', 'siap', 'selesai', 'dibatalkan'])->default('pending');
+            $table->string('token', 32)->unique();
             $table->timestamps();
         });
     }

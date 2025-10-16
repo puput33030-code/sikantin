@@ -26,10 +26,11 @@ class AdminOrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        if ($order->status === 'diproses') {
+        if ($order->status === 'pending') {
+            $order->update(['status'=>'diproses']);
+        } elseif ($order->status === 'diproses') {
             $order->update(['status'=>'siap']);
-        } elseif ($order->status === 'siap') {
-            $order->update(['status'=>'selesai']);
+
         }
 
         // Kirim email ke customer
@@ -49,12 +50,5 @@ class AdminOrderController extends Controller
         return view('pages.pesanan.show', compact('order'));
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    
 }

@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="page-title">Data Kasir</h4>
+            <h4 class="page-title">Data Menu</h4>
             <div class="card">
                 <div class="card-header">
                     <a href="{{ route('menu.create') }}" class="btn btn-primary">

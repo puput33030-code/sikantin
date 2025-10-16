@@ -30,8 +30,11 @@ class OrderStatusMail extends Mailable
     public function envelope(): Envelope
     {
         $subject=match($this->order->status){
-            'siap'=>'Status Pesanan Anda #' . $this->order->id,
-            'selesai'=>'Status Pesanan Anda #' . $this->order->id,
+            'pending'=>'Status Pesanan Anda #' . $this->order->id . ' sedang menunggu konfirmasi',
+            'diproses'=>'Status Pesanan Anda #' . $this->order->id . ' sedang diproses',
+            'siap'=>'Status Pesanan Anda #' . $this->order->id . ' siap',
+            'selesai'=>'Status Pesanan Anda #' . $this->order->id . ' selesai',
+            'dibatalkan'=>'Status Pesanan Anda #' . $this->order->id . ' dibatalkan',
         };
         return new Envelope(
             subject: $subject,
@@ -44,8 +47,11 @@ class OrderStatusMail extends Mailable
     public function content(): Content
     {
         $view=match($this->order->status){
+            'pending'=>'pages.email.orderstatuspending',
+            'diproses'=>'pages.email.orderstatusdiproses',
             'siap'=>'pages.email.orderstatussiap',
             'selesai'=>'pages.email.orderstatusselesai',
+            'dibatalkan'=>'pages.email.orderstatusdibatalkan',
         };
 
         return new Content(

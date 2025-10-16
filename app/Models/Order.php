@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -15,7 +16,17 @@ class Order extends Model
         'notes',
         'total_price',
         'status',
+        'token',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($order) {
+            if (empty($order->token)) {
+                $order->token = Str::random(32);
+            }
+        });
+    }
 
     public function order_items()
     {

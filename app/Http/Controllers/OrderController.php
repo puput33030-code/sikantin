@@ -7,6 +7,9 @@ use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Category;
+use App\Mail\OrderStatusMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -168,7 +171,8 @@ class OrderController extends Controller
             'delivery_address' => $customer['delivery_address'],
             'notes' => $customer['notes'],
             'total_price' => 0,
-            'status' => 'diproses',
+            'status' => 'pending',
+            'token' => Str::random(32),
         ]);
 
         $total = 0;
@@ -193,6 +197,9 @@ class OrderController extends Controller
 
         // Kosongkan session
         session()->forget(['cart', 'customer']);
+
+        // Kirim email ke customer
+        Mail::to($order->email)->send(new OrderStatusMail($order));
 
         return redirect()->route('order.index', $order->id)
                         ->with('success', 'Pesanan berhasil dibuat! Tunggu email dari kami jika pesanan Anda telah siap.');
@@ -234,6 +241,54 @@ class OrderController extends Controller
         $categories = Category::all();
 
         return view('pages.order.index', compact('menus', 'categories'));
+    }
+
+    public function cancelOrder($id, Request $request)
+    {
+        $order = Order::where('id', $id)
+                      ->where('token', $request->query('token'))
+                      ->first();
+
+        if (! $order) {
+            return view('pages.order.error', ['message' => 'Tautan tidak valid atau pesanan tidak ditemukan.']);
+        }
+
+        // Hanya boleh batalkan kalau masih pending
+        if ($order->status !== 'pending') {
+            return view('pages.order.error', ['message' => 'Pesanan tidak dapat dibatalkan karena sudah diproses.']);
+        }
+
+        $order->update([
+            'status' => 'dibatalkan'
+        ]);
+
+        return view('pages.order.cancelsuccess', compact('order'));
+    }
+
+    // Customer klik link "pesanan diterima"
+    public function doneOrder($id, Request $request)
+    {
+        $order = Order::where('id', $id)
+                      ->where('token', $request->query('token'))
+                      ->first();
+
+        if (! $order) {
+            return view('orders.error', ['message' => 'Tautan tidak valid atau pesanan tidak ditemukan.']);
+        }
+
+        // Hanya bisa menandai selesai kalau pesanan sudah 'siap'
+        if ($order->status !== 'siap') {
+            return view('orders.error', ['message' => 'Pesanan tidak dapat ditandai selesai.']);
+        }
+
+        $order->update([
+            'status' => 'selesai'
+        ]);
+
+        // (Opsional) kirim notifikasi ke admin
+        // Mail::to($order->email)->send(new OrderStatusMail($order));
+
+        return view('orders.done_success', compact('order'));
     }
 
 }

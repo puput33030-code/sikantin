@@ -36,8 +36,16 @@
                                         {{ $item->menus->name }} ({{ $item->qty }})@if (!$loop->last), @endif
                                     @endforeach
                                 </td>
-                                <td class="text-center"><span class="badge bg-{{ $order->status == 'diproses' ? 'warning' : ($order->status == 'siap' ? 'info' : 'success') }}">
-                                    {{ ucfirst($order->status) }}</span>
+                                <td class="text-center">
+                                    <span class="badge bg-{{ 
+                                        $order->status == 'pending' ? 'secondary' : 
+                                        ($order->status == 'diproses' ? 'warning' : 
+                                        ($order->status == 'siap' ? 'info' : 
+                                        ($order->status == 'selesai' ? 'success' : 
+                                        ($order->status == 'dibatalkan' ? 'danger' : 'secondary'))))
+                                    }}">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
                                 </td>
                             </tr>
                             @endforeach

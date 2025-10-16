@@ -25,6 +25,9 @@ Route::post('/cart/save-customer', [App\Http\Controllers\OrderController::class,
 Route::get('/confirmation', [App\Http\Controllers\OrderController::class, 'confirmation'])->name('order.confirmation');
 Route::post('/place-order', [App\Http\Controllers\OrderController::class, 'placeOrder'])->name('order.placeOrder');
 
+// Proses order (batal, selesai)
+Route::get('/order/{id}/cancel', [App\Http\Controllers\OrderController::class, 'cancelOrder'])->name('order.cancel');
+Route::get('/order/{id}/done', [App\Http\Controllers\OrderController::class, 'doneOrder'])->name('order.done');
 
 // Proses checkout (simpan ke tabel orders & order_items)
 Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'processCheckout'])->name('order.process');
