@@ -273,12 +273,12 @@ class OrderController extends Controller
                       ->first();
 
         if (! $order) {
-            return view('orders.error', ['message' => 'Tautan tidak valid atau pesanan tidak ditemukan.']);
+            return view('pages.order.error', ['message' => 'Tautan tidak valid atau pesanan tidak ditemukan.']);
         }
 
         // Hanya bisa menandai selesai kalau pesanan sudah 'siap'
         if ($order->status !== 'siap') {
-            return view('orders.error', ['message' => 'Pesanan tidak dapat ditandai selesai.']);
+            return view('pages.order.error', ['message' => 'Pesanan tidak dapat ditandai selesai.']);
         }
 
         $order->update([
@@ -288,7 +288,7 @@ class OrderController extends Controller
         // (Opsional) kirim notifikasi ke admin
         // Mail::to($order->email)->send(new OrderStatusMail($order));
 
-        return view('orders.done_success', compact('order'));
+        return view('pages.order.donesuccess', compact('order'));
     }
 
 }

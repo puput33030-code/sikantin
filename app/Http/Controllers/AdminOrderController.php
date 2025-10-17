@@ -30,7 +30,8 @@ class AdminOrderController extends Controller
             $order->update(['status'=>'diproses']);
         } elseif ($order->status === 'diproses') {
             $order->update(['status'=>'siap']);
-
+        } else {
+            return redirect()->back()->with('error', 'Status pesanan tidak dapat diperbarui lagi.');
         }
 
         // Kirim email ke customer

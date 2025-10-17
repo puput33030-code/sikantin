@@ -93,11 +93,10 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 @endpush
 
 @push('scripts')
-    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (Session::has('success'))
         <script type="text/javascript">
@@ -105,8 +104,7 @@
             icon: 'success',
             title: 'Berhasil',
             text: '{{ Session::get('success') }}',
-            showConfirmButton: false,
-            timer: 3000
+            confirmButtonText: 'OK'
         });
         </script>
     @endif

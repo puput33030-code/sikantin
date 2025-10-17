@@ -32,6 +32,7 @@
                                 <td class="text-center"><form action="{{ route('orders.updateStatus', $order->id) }}" method="POST">
                                     @csrf
                                     <select name="status" class="form-control">
+                                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
                                         <option value="diproses" {{ $order->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
                                         <option value="siap" {{ $order->status == 'siap' ? 'selected' : '' }}>Siap</option>
                                         <option value="selesai" {{ $order->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
@@ -82,5 +83,16 @@
             timer: 3000
         });
         </script>
+    @endif
+    @if (Session::has('error'))
+    <script type="text/javascript">
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: '{{ Session::get('error') }}',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    </script>
     @endif
 @endpush

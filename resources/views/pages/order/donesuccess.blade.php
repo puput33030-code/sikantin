@@ -2,15 +2,15 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Pembatalan Berhasil</title>
+    <title>Pesanan Selesai</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <script>
     Swal.fire({
         icon: 'success',
-        title: 'Pesanan Dibatalkan',
-        text: 'Pesanan Anda dengan nomor #{{ $order->id }} telah berhasil dibatalkan.',
+        title: 'Pesanan Selesai',
+        text: 'Pesanan Anda dengan nomor #{{ $order->id }} telah selesai.',
         confirmButtonText: 'OK'
     }).then(() => {
         // Setelah klik OK, tab akan otomatis tertutup

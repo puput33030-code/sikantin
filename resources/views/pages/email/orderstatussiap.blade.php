@@ -20,5 +20,15 @@
     <p>
         Siapkan uang senilai: <strong>Rp {{ number_format($order->total_price, 0, ',', '.') }}</strong> untuk membayar pesanan anda.
     </p>
+    <hr>
+    <p>
+        Mohon klik tombol di bawah ini jika pesanan telah diterima dan Anda telah melakukan pembayaran, untuk mengkonfirmasi bahwa pesanan Anda telah selesai.
+    </p>
+    <p>
+        <a href="{{ url('/order/' . $order->id . '/done?token=' . $order->token) }}"
+           style="background-color: #28a745; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none;">
+            Konfirmasi Selesai
+        </a>
+    </p>
 </body>
 </html>
