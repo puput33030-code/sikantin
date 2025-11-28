@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p>status pesanan anda sedang diproses</p>
+    <p>Status pesanan Anda sedang diproses.</p>
+    <p>Tetap pantau email dari kami untuk terus mendapatkan informasi tentang status pesanan Anda.</p>
 </body>
 </html>

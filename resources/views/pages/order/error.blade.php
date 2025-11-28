@@ -12,6 +12,8 @@
         title: 'Terjadi Kesalahan',
         text: '{{ $message }}',
         confirmButtonText: 'OK'
+    }).then(() => {
+        window.close();
     });
 </script>
 </body>

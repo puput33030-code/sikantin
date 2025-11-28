@@ -36,8 +36,11 @@
                                         <option value="diproses" {{ $order->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
                                         <option value="siap" {{ $order->status == 'siap' ? 'selected' : '' }}>Siap</option>
                                         <option value="selesai" {{ $order->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                                        <option value="dibatalkan" {{ $order->status == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
                                     </select>
-                                    <button type="submit" class="btn btn-info mt-2 align-self-center">Update</button>
+                                    @if ($order->status != 'selesai' && $order->status != 'dibatalkan')
+                                        <button type="button" class="btn btn-info mt-2 btn-confirm-update">Update</button>
+                                    @endif
                                 </form>
                                 </td>
                                 <td>
@@ -67,11 +70,40 @@
 
 @push('scripts')
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(function () {
             $('.dataTable').DataTable();
         });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // cari semua tombol Update
+        const buttons = document.querySelectorAll('.btn-confirm-update');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+
+                let form = btn.closest('form'); // ambil form terdekat
+                
+                Swal.fire({ 
+                title: "Are you sure?",
+                text: "You wan't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, update it!",
+                cancelButtonText: "Back"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit(); // jalankan pengiriman form
+                    }
+                });
+
+            });
+        });
+
+    });
     </script>
     @if (Session::has('success'))
         <script type="text/javascript">

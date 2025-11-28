@@ -51,7 +51,8 @@
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="qty" value="{{ $item['qty'] + 1 }}">
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                            @if($item['qty'] >= $item['stock']) disabled @endif>+</button>
                                     </form>
                                 </div>
                             </td>

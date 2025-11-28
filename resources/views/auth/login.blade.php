@@ -15,6 +15,8 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>Login | SiKantin</title>
+    
+    <link rel="icon" type="image/png" href="{{ asset('/img/favicon/logo.png') }}" />
 
     <meta name="description" content="" />
 
@@ -61,6 +63,11 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/js/config.js') }}"></script>
+    <style>
+      body {
+        background-color: #d7e6f4 !important;
+      }
+    </style>
   </head>
 
   <body>

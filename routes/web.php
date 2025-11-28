@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('pages.order.index');
@@ -31,6 +32,13 @@ Route::get('/order/{id}/done', [App\Http\Controllers\OrderController::class, 'do
 
 // Proses checkout (simpan ke tabel orders & order_items)
 Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'processCheckout'])->name('order.process');
+
+// Form input email
+Route::get('/riwayat', [App\Http\Controllers\CustomerController::class, 'formRiwayat'])->name('riwayat.form');
+
+// Proses dan tampilkan riwayat
+Route::post('/riwayat', [App\Http\Controllers\CustomerController::class, 'riwayatPesanan'])->name('riwayat.hasil');
+
 
 
 Auth::routes([

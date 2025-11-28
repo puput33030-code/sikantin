@@ -58,12 +58,13 @@ class OrderController extends Controller
                 "name" => $menus->name,
                 "price" => $menus->price,
                 "qty" => 1,
-                "image" => $menus->image
+                "image" => $menus->image,
+                "stock" => $menus->stock
             ];
         }
 
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Menu ditambahkan ke keranjang');
+        return redirect()->back();
     }
 
     // hapus dari keranjang

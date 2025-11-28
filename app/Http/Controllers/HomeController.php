@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Menu;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -42,7 +45,42 @@ class HomeController extends Controller
             'total_price'   => $ordersHarian->sum('total_price'),
         ];
 
-        return view('home', compact('orders', 'data', 'labels', 'ordersHarian', 'tanggal', 'summary'));
+        // ----- Menu Pesanan Terbanyak -----
+        // $bestMenu = OrderItem::select(
+        //         'menu_id',
+        //         DB::raw('SUM(qty) as total')
+        //     )
+        //     ->groupBy('menu_id')
+        //     ->orderByDesc('total')
+        //     ->first();
+
+        // $bestMenuData = $bestMenu ? Menu::find($bestMenu->menu_id) : null;
+
+        // ----- Menu Pesanan Terendah -----
+        // $worstMenu = OrderItem::select(
+        //         'menu_id',
+        //         DB::raw('SUM(qty) as total')
+        //     )
+        //     ->groupBy('menu_id')
+        //     ->orderBy('total')
+        //     ->first();
+
+        // $worstMenuData = $worstMenu ? Menu::find($worstMenu->menu_id) : null;
+        $menuTerbanyak = OrderItem::with('menu')
+            ->select('menu_id', DB::raw('SUM(qty) as total_qty'))
+            ->whereDate('created_at', $tanggal)
+            ->groupBy('menu_id')
+            ->orderByDesc('total_qty')
+            ->first();
+
+        $menuTerendah = OrderItem::with('menu')
+            ->select('menu_id', DB::raw('SUM(qty) as total_qty'))
+            ->whereDate('created_at', $tanggal)
+            ->groupBy('menu_id')
+            ->orderBy('total_qty', 'asc')
+            ->first();
+
+        return view('home', compact('orders', 'data', 'labels', 'ordersHarian', 'tanggal', 'summary', 'menuTerbanyak', 'menuTerendah'));
     }
 
     public function laporanHarian(Request $request)
